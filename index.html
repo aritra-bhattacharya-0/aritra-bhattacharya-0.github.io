@@ -1,230 +1,435 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Aritra Bhattacharya</title>
-<meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aritra Bhattacharya | Mathematician</title>
+    <!-- Font Awesome for minimal icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { }
-</style>
-<meta charset="utf-8">
+        :root {
+            --primary-color: #1e3c72;
+            --accent-color: #3b82f6;
+            --text-color: #1e293b;
+            --light-text: #64748b;
+            --background: #ffffff;
+            --light-bg: #f8fafc;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: #f5f5f5;
+            padding: 2rem 1rem;
+        }
+
+        #content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--background);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 2.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 2rem 0 1.2rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        /* Introduction - all paragraphs same size */
+        .intro p {
+            margin-bottom: 1.2rem;
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        .intro a {
+            color: var(--accent-color);
+            text-decoration: none;
+            border-bottom: 1px dotted transparent;
+            transition: border-color 0.2s;
+        }
+
+        .intro a:hover {
+            border-bottom-color: var(--accent-color);
+        }
+
+        /* Special style for SageMath link */
+        .sagemath-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted transparent;
+            transition: border-color 0.2s;
+        }
+
+        .sagemath-link:hover {
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* Contact - simple line */
+        .contact {
+            margin: 1.5rem 0 2rem;
+            padding: 0.8rem 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .contact-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-item i {
+            color: var(--accent-color);
+            width: 1.2rem;
+            margin-right: 0.3rem;
+        }
+
+        .contact-item a {
+            color: var(--accent-color);
+            text-decoration: none;
+            border-bottom: 1px dotted transparent;
+            transition: border-color 0.2s;
+        }
+
+        .contact-item a:hover {
+            border-bottom-color: var(--accent-color);
+        }
+
+        .cv-link {
+            background: var(--light-bg);
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .cv-link:hover {
+            background: var(--border-color);
+        }
+
+        .cv-link i {
+            margin-right: 0.3rem;
+        }
+
+        /* Publications list */
+        .publications-list {
+            list-style: none;
+        }
+
+        .publications-list li {
+            margin-bottom: 1.2rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border-color);
+            line-height: 1.5;
+        }
+
+        .publications-list li:last-child {
+            border-bottom: none;
+        }
+
+        .pub-title {
+            font-weight: 500;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px dotted transparent;
+            transition: border-color 0.2s;
+        }
+
+        .pub-title:hover {
+            border-bottom-color: var(--primary-color);
+        }
+
+        .publication-meta {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--light-text);
+            margin-top: 0.3rem;
+        }
+
+        .publication-meta i {
+            font-size: 0.8rem;
+            margin-right: 0.2rem;
+            color: var(--accent-color);
+        }
+
+        .publication-meta a {
+            color: var(--light-text);
+            text-decoration: none;
+            border-bottom: 1px dotted transparent;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .publication-meta a:hover {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        .arxiv-link {
+            display: inline-block;
+            background: #f0f0f0;
+            color: var(--light-text);
+            padding: 0.15rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .arxiv-link:hover {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .journal-link {
+            color: var(--light-text);
+            text-decoration: none;
+            border-bottom: 1px dotted transparent;
+        }
+
+        .journal-link:hover {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        /* Style for inline code/monospace */
+        tt, code {
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+            background: #e9eef3;
+            padding: 0.1rem 0.3rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+        }
+
+        /* Navigation link */
+        .nav-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.6rem 1.2rem;
+            background: var(--light-bg);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+            border: 1px solid var(--border-color);
+        }
+
+        .nav-link:hover {
+            background: var(--border-color);
+        }
+
+        .nav-link i {
+            margin-right: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            #content {
+                padding: 1.5rem;
+            }
+            
+            .contact {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .contact-left {
+                gap: 1rem;
+            }
+            
+            .arxiv-link {
+                margin-left: 0;
+                margin-top: 0.3rem;
+                display: inline-block;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            #content {
+                box-shadow: none;
+                padding: 1rem;
+            }
+            
+            .nav-link {
+                display: none;
+            }
+            
+            .arxiv-link, .journal-link {
+                color: black;
+                text-decoration: none;
+            }
+        }
+    </style>
 </head>
 <body>
-<div id="content" class="content">
-<h1 class="title">Aritra Bhattacharya</h1>
-<p>
-I am currently a postdoc at <a href="https://bicmr.pku.edu.cn/">Beijing International Center for Mathematical Research</a>, Peking University. I completed my Ph.D. in mathematics from the <a href="https://www.imsc.res.in/">Institute of Mathematical Sciences, Chennai, India</a> in April 2024, my Ph.D. supervisor was Prof. <a href="https://www.imsc.res.in/~svis/">S. Viswanath</a>. 
-</p>
-
-<p>
-My main research interest is in algebraic combinatorics, in particular I have worked on symmetric functions and Macdonald polynomials and their specializations such as Hall-Littlewood and q-Whittaker functions. More recently I am focusing on LLT polynomials and their generalizations. In my research I have worked with combinatorial models of various symmetric functions involving fillings of Young diagrams, Dyck paths, and algebraic tools such as finite, affine and double affine Hecke algebras, and representation theory of Kac-Moody Lie algebras.
-</p>
-
-<p>
-email id: matharitra@gmail.com 
-</p>
-
-<div id="outline-container-org1e1f5ad" class="outline-2">
-<h2 id="org1e1f5ad">Preprints and Publications</h2>
-<div class="outline-text-2" id="text-org1e1f5ad">
-<ul class="org-ul">
-<li>On factorization of matrix of Kazhdan-Lusztig polynomials, with Ashish Mishra and  Shraddha Srivastava, arxiv: <a href="https://arxiv.org/abs/2602.19508">2602.19508</a>.</li>
-<li>A tableaux formula for q-rook numbers, with Tirtharaj Basu, <a href="https://alco.centre-mersenne.org/articles/10.5802/alco.466/">Algebraic Combinatorics, Volume 9 (2026) no. 1</a>, arxiv: <a href="https://arxiv.org/abs/2507.00766">2507.00766</a>.</li>
-<li>Equating Inv-Quinv formulas for the q-Whittaker and modified Hall-Littlewood functions, <a href="https://www.combinatorics.org/ojs/index.php/eljc/article/view/v32i4p34">The Electronic Journal of Combinatorics, Volume 32, Issue 4 (2025)</a>, arxiv: <a href="https://arxiv.org/abs/2412.09929">2412.09929</a>.</li>
-<li>q-Whittaker polynomials: bases, branching and direct limits, with T V Ratheesh and Sankaran Viswanath, arxiv: <a href="https://arxiv.org/abs/2412.00116">2412.00116</a>.</li>
-<li>The monomial expansion formula for Hall-Littlewood P-polynomials, arxiv: <a href="https://arxiv.org/abs/2407.14652">2407.14652</a>.</li>
-<li>Monomial expansions for q-Whittaker and modified Hall-Littlewood polynomials, with T V Ratheesh and Sankaran Viswanath, <a href="https://www.mat.univie.ac.at/~slc/wpapers/FPSAC2024/61.html">FPSAC 2024 extended abstract</a>, arxiv: <a href="https://arxiv.org/abs/2311.07904">2311.07904</a>.</li>
-<li>Clebsch-Gordan coefficients for Macdonald polynomials, with Arun Ram, <a href="https://link.springer.com/article/10.1007/s10468-024-10303-8">Algebras and Representation Theory (2024)</a>, arxiv: <a href="https://arxiv.org/abs/2310.10846">2310.10846</a>.</li>
-<li>Haglund's positivity conjecture for multiplicity one pairs, <a href="https://www.mat.univie.ac.at/~slc/wpapers/s87bhatt.html">Seminaire Lotharingien de Combinatoire, B87b (2023)</a>, arxiv: <a href="https://arxiv.org/abs/2205.11802">2205.11802</a>.</li>
-</ul>
-
-<p>
-Some of my  <a href="./talks.html">presentations</a> are listed here.
-</p>
-</div>
-</div>
-</div>
+    <div id="content">
+        <header>
+            <h1>Aritra Bhattacharya</h1>
+        </header>
+        
+        <section class="intro">
+            <p>
+                I am currently a postdoc at <a href="https://bicmr.pku.edu.cn/">Beijing International Center for Mathematical Research</a>, Peking University, under the mentorship of Prof. <a href="http://faculty.bicmr.pku.edu.cn/~gaoyibo/">Yibo Gao</a>. I completed my Ph.D. in mathematics from the <a href="https://www.imsc.res.in/">Institute of Mathematical Sciences, Chennai, India</a> in April 2024. My Ph.D. supervisor was Prof. <a href="https://www.imsc.res.in/~svis/">S. Viswanath</a>.
+            </p>
+            
+            <p>My research focuses on Algebraic Combinatorics, with a central theme of understanding relations between families of symmetric functions and establishing positivity results. I work primarily with Macdonald polynomials and their specializations (Hall-Littlewood and <em>q</em>-Whittaker functions), as well as LLT polynomials. To study these objects, I employ combinatorial models involving Young tableaux and Dyck paths, alongside algebraic tools from finite, affine, and double affine Hecke algebras and the representation theory of Kac-Moody Lie algebras.</p>
+            
+            <p>Recently, I have engaged with Kazhdan-Lusztig theory, incorporating geometric techniques from the theory of perverse sheaves to prove a generalization of the classical Kazhdan-Lusztig positivity theorems. I regularly use computer programming tools such as <a href="https://www.sagemath.org/" class="sagemath-link">SageMath</a> to experiment and formulate conjectures.</p>
+            
+            <div class="contact">
+                <div class="contact-left">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:matharitra@gmail.com">matharitra@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:aritrabh@qq.com">aritrabh@qq.com</a>
+                    </div>
+                </div>
+                <a href="cv.pdf" class="cv-link" target="_blank">
+                    <i class="fas fa-file-pdf"></i> Download CV (PDF)
+                </a>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Preprints and Publications</h2>
+            
+            <ul class="publications-list">
+                <li>
+                    <a href="https://arxiv.org/abs/2602.19508" class="pub-title">On factorization of matrix of Kazhdan-Lusztig polynomials</a>
+                    <a href="https://arxiv.org/abs/2602.19508" class="arxiv-link">arXiv:2602.19508</a>
+                    <span class="publication-meta"><i class="fas fa-users"></i> with Ashish Mishra and Shraddha Srivastava</span>
+                </li>
+                
+                <li>
+                    <a href="https://arxiv.org/abs/2507.00766" class="pub-title">A tableaux formula for q-rook numbers</a>
+                    <a href="https://arxiv.org/abs/2507.00766" class="arxiv-link">arXiv:2507.00766</a>
+                    <span class="publication-meta">
+                        <i class="fas fa-users"></i> with Tirtharaj Basu • 
+                        <i class="fas fa-book"></i> 
+                        <a href="https://alco.centre-mersenne.org/articles/10.5802/alco.466/" class="journal-link">Algebraic Combinatorics, Volume 9 (2026) no. 1</a>
+                    </span>
+                </li>
+                
+                <li>
+                    <a href="https://arxiv.org/abs/2412.09929" class="pub-title">Equating Inv-Quinv formulas for the q-Whittaker and modified Hall-Littlewood functions</a>
+                    <a href="https://arxiv.org/abs/2412.09929" class="arxiv-link">arXiv:2412.09929</a>
+                    <span class="publication-meta">
+                        <i class="fas fa-book"></i> 
+                        <a href="https://www.combinatorics.org/ojs/index.php/eljc/article/view/v32i4p34" class="journal-link">The Electronic Journal of Combinatorics, Volume 32, Issue 4 (2025)</a>
+                    </span>
+                </li>
+                
+                <li>
+                    <a href="https://arxiv.org/abs/2412.00116" class="pub-title">q-Whittaker polynomials: bases, branching and direct limits</a>
+                    <a href="https://arxiv.org/abs/2412.00116" class="arxiv-link">arXiv:2412.00116</a>
+                    <span class="publication-meta"><i class="fas fa-users"></i> with T V Ratheesh and Sankaran Viswanath</span>
+                </li>
+                
+                <li>
+                    <a href="https://arxiv.org/abs/2407.14652" class="pub-title">The monomial expansion formula for Hall-Littlewood P-polynomials</a>
+                    <a href="https://arxiv.org/abs/2407.14652" class="arxiv-link">arXiv:2407.14652</a>
+                </li>
+                
+                <li>
+                    <a href="https://arxiv.org/abs/2311.07904" class="pub-title">Monomial expansions for q-Whittaker and modified Hall-Littlewood polynomials</a>
+                    <a href="https://arxiv.org/abs/2311.07904" class="arxiv-link">arXiv:2311.07904</a>
+                    <span class="publication-meta">
+                        <i class="fas fa-users"></i> with T V Ratheesh and Sankaran Viswanath • 
+                        <i class="fas fa-file"></i> 
+                        <a href="https://www.mat.univie.ac.at/~slc/wpapers/FPSAC2024/61.html" class="journal-link">FPSAC 2024 extended abstract</a>
+                    </span>
+                </li>
+                
+                <li>
+                    <a href="https://arxiv.org/abs/2310.10846" class="pub-title">Clebsch-Gordan coefficients for Macdonald polynomials</a>
+                    <a href="https://arxiv.org/abs/2310.10846" class="arxiv-link">arXiv:2310.10846</a>
+                    <span class="publication-meta">
+                        <i class="fas fa-users"></i> with Arun Ram • 
+                        <i class="fas fa-book"></i> 
+                        <a href="https://link.springer.com/article/10.1007/s10468-024-10303-8" class="journal-link">Algebras and Representation Theory (2024)</a>
+                    </span>
+                </li>
+                
+                <li>
+                    <a href="https://arxiv.org/abs/2205.11802" class="pub-title">Haglund's positivity conjecture for multiplicity one pairs</a>
+                    <a href="https://arxiv.org/abs/2205.11802" class="arxiv-link">arXiv:2205.11802</a>
+                    <span class="publication-meta">
+                        <i class="fas fa-book"></i> 
+                        <a href="https://www.mat.univie.ac.at/~slc/wpapers/s87bhatt.html" class="journal-link">Seminaire Lotharingien de Combinatoire, B87b (2023)</a>
+                    </span>
+                </li>
+            </ul>
+            
+            <p style="margin-top: 1.5rem;">
+                <a href="talks.html" class="nav-link">
+                    <i class="fas fa-arrow-right"></i> View selected talks
+                </a>
+            </p>
+        </section>
+    </div>
 </body>
 </html>
